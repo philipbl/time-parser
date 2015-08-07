@@ -1,12 +1,12 @@
 #lang racket
 
-(require parser-tools/lex
+(require racket/generator
+         parser-tools/lex
          (prefix-in : parser-tools/lex-sre)
-         parser-tools/yacc
-         rackunit)
+         parser-tools/yacc)
 
-;(require srfi/41)
-(require racket/generator)
+(provide run-parser/port 
+         run-parser/string)
 
 ; <STATEMENT> : <ABS_STATEMENT> (<OPERATOR> <STATEMENT>)*
 ;             | <REL_STATEMENT> (<OPERATOR> <STATEMENT>)*
@@ -161,13 +161,18 @@
                      (loop (cdr lst)))))
              (loop (main-lexer port))))
 
-(define (run-parser port)
+(define (run-parser/port port)
   (let ([toks (get-tokens port)])
     (parse toks)))
 
-(define arguments (vector->list (current-command-line-arguments)))
+(define (run-parser/string str)
+  (let ([port (open-input-string str)])
+    (run-parser/port port)))
+         
 
-(if (null? arguments)
+;(define arguments (vector->list (current-command-line-arguments)))
+
+#;(if (null? arguments)
     (display (run-parser (current-input-port)))
     (let* [(input (string-join arguments))
            (input-port (open-input-string input))]
