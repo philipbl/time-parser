@@ -123,9 +123,9 @@
 
     ; <STATEMENT> : <ABS_STATEMENT> (<OPERATOR> <STATEMENT>)*
     ;             | <REL_STATEMENT> (<OPERATOR> <STATEMENT>)*
-    (statement [(abs-statement OPERATOR statement) (combine-times $1 $3 $2)]
+    (statement [(statement OPERATOR abs-statement) (combine-times $1 $3 $2)]
                [(abs-statement) $1]
-               [(rel-statement OPERATOR statement) (combine-times $1 $3 $2)]
+               [(statement OPERATOR rel-statement) (combine-times $1 $3 $2)]
                [(rel-statement) $1])
 
     ; <ABS_STATEMENT> : <ABS_TIME> <JOINER> <ABS_TIME>

@@ -37,8 +37,8 @@
 (check-equal? (run-parser/string "30 minutes - 9:00 AM to 5:00 PM") "-7.5 hours\n")
 
 ; Bug
-#| (check-equal? (run-parser/string "9:00 AM to 5:00 PM - 1 hour + 1 hour") "8.0 hours\n") |#
-#| (check-equal? (run-parser/string "8 hours - 5:00 PM to 6:00 PM + 1 hour") "8.0 hours\n") |#
-#| (check-equal? (run-parser/string "8 hours - 5:00 PM to 6:00 PM - 1 hour") "6.0 hours\n") |#
+(check-equal? (run-parser/string "9:00 AM to 5:00 PM - 1 hour + 1 hour") "8.0 hours\n")
+(check-equal? (run-parser/string "8 hours - 5:00 PM to 6:00 PM + 1 hour") "8.0 hours\n")
+(check-equal? (run-parser/string "8 hours - 5:00 PM to 6:00 PM - 1 hour") "6.0 hours\n") 
 
 ;;;;;;;; Error tests
