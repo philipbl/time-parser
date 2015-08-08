@@ -169,11 +169,13 @@
   (let ([port (open-input-string str)])
     (run-parser/port port)))
 
-
-;(define arguments (vector->list (current-command-line-arguments)))
-
-#;(if (null? arguments)
-    (display (run-parser (current-input-port)))
+(module+ main
+  (define arguments (vector->list (current-command-line-arguments)))
+  
+  (if (null? arguments)
+    (display (run-parser/port (current-input-port)))
     (let* [(input (string-join arguments))
            (input-port (open-input-string input))]
-      (display (run-parser input-port))))
+      (display (run-parser/port input-port)))))
+
+
